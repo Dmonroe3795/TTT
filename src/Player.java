@@ -3,43 +3,35 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
-public class Player {
+import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+public class Player extends Application{
 	public static void main(String[] args) throws UnknownHostException, IOException {
-		int PORT_NUM;
-		PORT_NUM = 8016;
+		launch(args);
+	}
 	
-		Socket myClient = null;
-		PrintWriter os = null;
-		BufferedReader is = null;
-		Scanner sc = null;
-		System.out.println("Attempting to connect");
-		try {
-			myClient = new Socket("localhost", PORT_NUM);
-			sc = new Scanner(System.in);
-			System.out.println("Connected to host: " + PORT_NUM);
-			os = new PrintWriter(myClient.getOutputStream(), true);
-			System.out.println("Created output Stream");
-			is = new BufferedReader(new InputStreamReader(myClient.getInputStream()));
-			System.out.print("Created input stream");
-			// is = new DataInputStream(myClient.getInputStream());
-		} catch (IOException e) {
+	@Override
+	public void start(Stage stage) throws Exception {
+		try
+		{
+		Parent root = FXMLLoader.load(getClass().getResource("TTTfxml.fxml"));
+		stage.setTitle("Tic Tac Toe");
+		stage.setScene(new Scene(root,500,800));
+		stage.show();
+		}
+		catch(Exception e)
+		{
 			System.out.println(e);
 		}
-		System.out.println("Connected");
-		String serverLine;
-		if (myClient != null && os != null && is != null) {
-			while (myClient.isConnected()) {
-				while ((serverLine = is.readLine()) != null) {
-					if (serverLine.equals("m"))//m is my flag that server wants input
-					{
-						System.out.print("Make a move choose a space 1-9 that isnt occupied");
-						int x = sc.nextInt();
-						os.println(x);
-					}
-					else
-					System.out.println(serverLine);
-				}	
-			}
-		}
+		
+		
+		
 	}
 }

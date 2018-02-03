@@ -1,9 +1,11 @@
+import java.io.Serializable;
 
-public class Board {
+public class Board implements Serializable{
 	private int[][] boardArray;
 	public int[][] getBoardArray() {
 		return boardArray;
 	}
+	
 	public void setBoardArray(int[][] boardArray) {
 		this.boardArray = boardArray;
 	}
