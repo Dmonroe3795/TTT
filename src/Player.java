@@ -25,6 +25,7 @@ public class Player extends Application{
 		stage.setTitle("Tic Tac Toe");
 		stage.setScene(new Scene(root,500,800));
 		stage.show();
+		
 		}
 		catch(Exception e)
 		{

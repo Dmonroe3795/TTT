@@ -5,7 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
+//import java.util.concurrent.TimeUnit;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,35 +13,25 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
-public class guiController {
-	 @FXML
-	 Button btn1;
-	 @FXML
-	 Button btn2;
-	 @FXML
-	 Button btn3;
-	 @FXML
-	 Button btn4;
-	 @FXML
-	 Button btn5;
-	 @FXML
-	 Button btn6;
-	 @FXML
-	 Button btn7;
-	 @FXML
-	 Button btn8;
-	 @FXML
-	 Button btn9;
-	 @FXML
-	 Label turn;
-	 @FXML
-	 GridPane grid;
-	 @FXML
-	 VBox box;
+public class guiController extends Thread{
+	 
+	@FXML Button btn1;
+	@FXML Button btn2;
+	@FXML Button btn3;
+	@FXML Button btn4;
+	@FXML Button btn5;
+	@FXML Button btn6;
+	@FXML Button btn7;
+	@FXML Button btn8;
+	@FXML Button btn9;
+	@FXML Label turn;
+	@FXML GridPane grid;
+	@FXML VBox box;
 	 
 	 
 	public  int move;
 	public int PORT_NUM;
+	public guiController thread = null;
 	public  Socket myClient = null;
 	public  PrintWriter os = null;
 	public  ObjectInputStream objectIn= null;
@@ -52,8 +42,9 @@ public class guiController {
 		PORT_NUM = 8027;
 		move = -1;
 	}
-	public void connect() throws ClassNotFoundException, IOException, InterruptedException
+	public void run()
 	{
+		
 		System.out.println("Attempting to connect");
 		try {
 			myClient = new Socket("localhost", PORT_NUM);
@@ -70,39 +61,44 @@ public class guiController {
 		}
 		System.out.println("Connected");
 		
-		running();
+
+		
 	}
 	public void running() throws ClassNotFoundException, IOException, InterruptedException
 	{
-		System.out.println("Running");
-		String serverLine;
-		//Board objectline;
-		Board board; //= (Board) objectIn.readObject();
 		
-		if (myClient != null && os != null && is != null) {
-			while (myClient.isConnected()) {
-				while (/*(serverLine = is.readLine())*/(board = (Board) objectIn.readObject()) != null) {
-					//if (serverLine.equals("m"))//m is my flag that server wants input
-				//	{
-					System.out.println("Received Board \n" + board);
-						move = -1;
-						//turn.setText("Its Your Turn!");
-						updateBoard(board);
-						
-						//int x = 4;
-						do
-						{
-							System.out.print(".");
-						}while(move==-1);
-						os.println(move);
-						System.out.println("Sent Move");
-						//turn.setText("Its Not Your Turn!");
-					//}
-					//else
-					//System.out.println(serverLine);
-				}	
-			}
+		try {
+			thread = new guiController();
+		} catch (ClassNotFoundException | IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
+		thread.start();
+		
+	}
+
+	public void go() throws InterruptedException, ClassNotFoundException, IOException {
+		System.out.println("Running");
+
+		Board board;
+
+		System.out.println("Where am i");
+		if ((board = (Board) thread.objectIn.readObject()) != null) {
+			System.out.println("I am here");
+			System.out.println("Received Board \n" + board);
+
+			turn.setText("Its Your Turn!");
+			updateBoard(board);
+
+			// os.println(move);
+			// System.out.println("Sent Move");
+			
+			// }
+			// else
+			// System.out.println(serverLine);
+		}
+		// }
+
 	}
 	public String cellToMark(int x)
 	{
@@ -130,31 +126,49 @@ public class guiController {
 		System.out.println("Board Updated");
 		
 	}
-	public void btn1action() {
-		move = 1;
+	public void btn1action() throws ClassNotFoundException, InterruptedException, IOException {
+		thread.os.println(1);
+		turn.setText("Its not Turn!");
+		go();
 	}
-	public void btn2action() {
-		move = 2;
+	public void btn2action() throws ClassNotFoundException, InterruptedException, IOException {
+		thread.os.println(2);
+		turn.setText("Its not Turn!");
+		go();
 	}
-	public void btn3action() {
-		move = 3;
+	public void btn3action() throws ClassNotFoundException, InterruptedException, IOException {
+		thread.os.println(3);
+		turn.setText("Its not Turn!");
+		go();
 	}
-	public void btn4action() {
-		move = 4;
+	public void btn4action() throws ClassNotFoundException, InterruptedException, IOException {
+		thread.os.println(4);
+		turn.setText("Its not Turn!");
+		go();
 	}
-	public void btn5action() {
-		move = 5;
+	public void btn5action() throws ClassNotFoundException, InterruptedException, IOException {
+		thread.os.println(5);
+		turn.setText("Its not Turn!");
+		go();
 	}
-	public void btn6action() {
-		move = 6;
+	public void btn6action() throws ClassNotFoundException, InterruptedException, IOException {
+		thread.os.println(6);
+		turn.setText("Its not Turn!");
+		go();
 	}
-	public void btn7action() {
-		move = 7;
+	public void btn7action() throws ClassNotFoundException, InterruptedException, IOException {
+		thread.os.println(7);
+		turn.setText("Its not Turn!");
+		go();
 	}
-	public void btn8action() {
-		move = 8;
+	public void btn8action() throws ClassNotFoundException, InterruptedException, IOException {
+		thread.os.println(8);
+		turn.setText("Its not Turn!");
+		go();
 	}
-	public void btn9action() {
-		move = 9;
+	public void btn9action() throws ClassNotFoundException, InterruptedException, IOException {
+		thread.os.println(9);
+		turn.setText("Its not Turn!");
+		go();
 	}
 }
