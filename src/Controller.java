@@ -72,6 +72,7 @@ public class Controller
                 	
                 	objectOut.writeObject(gameBoard);
                 	objectOut.flush();
+                	System.out.println(gameBoard);
                 	System.out.println("board sent");
                 	move = Integer.parseInt(in.readLine());
                 	

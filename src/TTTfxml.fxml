@@ -15,7 +15,6 @@
             <Font size="23.0" />
          </font>
       </Label>
-      <Button fx:id="startBtn" mnemonicParsing="false" onAction="#go" text="Start" />
       <Button fx:id="connectBtn" mnemonicParsing="false" onAction="#running" text="Connect" />
       <GridPane fx:id="grid" alignment="BOTTOM_CENTER" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
         <columnConstraints>

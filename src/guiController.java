@@ -77,27 +77,13 @@ public class guiController extends Thread{
 		
 	}
 
-	public void go() throws InterruptedException, ClassNotFoundException, IOException {
+	public Board recieveBoard() throws InterruptedException, ClassNotFoundException, IOException {
 		System.out.println("Running");
 
-		Board board;
+		Board board = (Board) thread.objectIn.readObject();
 
-		System.out.println("Where am i");
-		if ((board = (Board) thread.objectIn.readObject()) != null) {
-			System.out.println("I am here");
-			System.out.println("Received Board \n" + board);
-
-			turn.setText("Its Your Turn!");
-			updateBoard(board);
-
-			// os.println(move);
-			// System.out.println("Sent Move");
-			
-			// }
-			// else
-			// System.out.println(serverLine);
-		}
-		// }
+		
+		return board;
 
 	}
 	public String cellToMark(int x)
@@ -129,46 +115,46 @@ public class guiController extends Thread{
 	public void btn1action() throws ClassNotFoundException, InterruptedException, IOException {
 		thread.os.println(1);
 		turn.setText("Its not Turn!");
-		go();
+		updateBoard(recieveBoard());
 	}
 	public void btn2action() throws ClassNotFoundException, InterruptedException, IOException {
 		thread.os.println(2);
 		turn.setText("Its not Turn!");
-		go();
+		updateBoard(recieveBoard());
 	}
 	public void btn3action() throws ClassNotFoundException, InterruptedException, IOException {
 		thread.os.println(3);
 		turn.setText("Its not Turn!");
-		go();
+		updateBoard(recieveBoard());
 	}
 	public void btn4action() throws ClassNotFoundException, InterruptedException, IOException {
 		thread.os.println(4);
 		turn.setText("Its not Turn!");
-		go();
+		updateBoard(recieveBoard());
 	}
 	public void btn5action() throws ClassNotFoundException, InterruptedException, IOException {
 		thread.os.println(5);
 		turn.setText("Its not Turn!");
-		go();
+		updateBoard(recieveBoard());
 	}
 	public void btn6action() throws ClassNotFoundException, InterruptedException, IOException {
 		thread.os.println(6);
 		turn.setText("Its not Turn!");
-		go();
+		updateBoard(recieveBoard());
 	}
 	public void btn7action() throws ClassNotFoundException, InterruptedException, IOException {
 		thread.os.println(7);
 		turn.setText("Its not Turn!");
-		go();
+		updateBoard(recieveBoard());
 	}
 	public void btn8action() throws ClassNotFoundException, InterruptedException, IOException {
 		thread.os.println(8);
 		turn.setText("Its not Turn!");
-		go();
+		updateBoard(recieveBoard());
 	}
 	public void btn9action() throws ClassNotFoundException, InterruptedException, IOException {
 		thread.os.println(9);
 		turn.setText("Its not Turn!");
-		go();
+		updateBoard(recieveBoard());
 	}
 }
