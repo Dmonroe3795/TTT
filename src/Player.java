@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
@@ -7,7 +8,6 @@ public class Player {
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		int PORT_NUM;
 		PORT_NUM = 8016;
-	
 		Socket myClient = null;
 		PrintWriter os = null;
 		BufferedReader is = null;
@@ -21,12 +21,12 @@ public class Player {
 			System.out.println("Created output Stream");
 			is = new BufferedReader(new InputStreamReader(myClient.getInputStream()));
 			System.out.print("Created input stream");
-			// is = new DataInputStream(myClient.getInputStream());
 		} catch (IOException e) {
 			System.out.println(e);
 		}
 		System.out.println("Connected");
 		String serverLine;
+		try {
 		if (myClient != null && os != null && is != null) {
 			while (myClient.isConnected()) {
 				while ((serverLine = is.readLine()) != null) {
@@ -41,5 +41,10 @@ public class Player {
 				}	
 			}
 		}
+		}catch(SocketException e)
+		{
+			System.out.println("Disconnected");
+		}
+		
 	}
 }

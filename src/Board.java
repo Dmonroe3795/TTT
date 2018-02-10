@@ -15,6 +15,8 @@ public class Board {
 	}
 	public boolean makeMove(int space, boolean player)
 	{
+		if(space < 1 || space > 9)
+			return false;
 		System.out.println("Attempting move");
 		if(getCell(space) == 1 || getCell(space) == 2)
 		{
